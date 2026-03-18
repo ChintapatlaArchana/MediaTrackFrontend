@@ -1,0 +1,163 @@
+/* ===== PAGE ===== */
+.platform-container {
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #0f172a, #020617);
+  padding: 28px 36px;
+  color: #e5e7eb;
+  font-family: Inter, system-ui;
+}
+
+/* ===== HEADER ===== */
+.platform-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.header-left {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+.title-icon {
+  width: 44px;
+  height: 44px;
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+}
+
+.header-right {
+  display: flex;
+  gap: 12px;
+}
+
+.time {
+  background: #020617;
+  border: 1px solid #1f2937;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+.live {
+  background: rgba(139, 92, 246, 0.15);
+  color: #a78bfa;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+}
+
+/* ===== CARDS ===== */
+.platform-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-bottom: 34px;
+}
+
+.platform-card {
+  background: linear-gradient(180deg, #0b1220, #020617);
+  border: 1px solid #1f2937;
+  border-radius: 16px;
+  padding: 18px;
+  transition: all 0.2s ease;
+}
+
+.platform-card:hover {
+  transform: translateY(-4px);
+  border-color: #8b5cf6;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.card-icon {
+  width: 38px;
+  height: 38px;
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.arrow {
+  color: #6b7280;
+}
+
+.platform-card p {
+  color: #9ca3af;
+  font-size: 13px;
+}
+
+.badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.badge-row span {
+  background: #020617;
+  border: 1px solid #1f2937;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+/* ===== HEALTH ===== */
+.health-section h2 {
+  font-size: 18px;
+  margin-bottom: 16px;
+}
+
+.health-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.health-card {
+  background: linear-gradient(180deg, #0b1220, #020617);
+  border: 1px solid #1f2937;
+  border-radius: 16px;
+  padding: 18px;
+}
+
+.health-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: rgba(139, 92, 246, 0.2);
+  color: #a78bfa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.health-icon.yellow {
+  background: rgba(234, 179, 8, 0.2);
+  color: #facc15;
+}
+
+.health-card.danger h3 {
+  color: #ef4444;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1100px) {
+  .platform-cards,
+  .health-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

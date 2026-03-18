@@ -1,18 +1,19 @@
-import './App.css';
-import { Routes, Route } from 'react-router-dom';
-import { Login } from './pages/Login';
-import { Register } from './pages/Register';
-import { Home } from './pages/Home';
+import { Routes, Route } from "react-router-dom";
+
+import PlatformOperation from "./pages/operator/PlatformOperation";
 
 function App() {
   return (
-    <div>
-        <Routes>
-          <Route path="/" element={<Login/>}></Route>
-          <Route path="/register" element={<Register/>}></Route>
-          <Route path="/home" element={<Home/>}></Route>
-        </Routes>
-    </div>
+    <Routes>
+      <Route
+        path="/operator"
+        element={
+          
+            <PlatformOperation />
+         
+        }
+      />
+    </Routes>
   );
 }
 
