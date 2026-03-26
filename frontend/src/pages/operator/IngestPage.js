@@ -812,6 +812,9 @@ const IngestPage = () => {
 
   return (
     <div className="ingest-page-wrapper">
+      <div className="top-right-logo-wrapper">
+        <MediaTrackLogo size={36} gap={8} />
+      </div>
       <div className="nav-container-top">
         <button onClick={() => navigate("/operator")} className="btn-back-link">
           <FiArrowLeft /> Back to Platform Dashboard
@@ -833,7 +836,7 @@ const IngestPage = () => {
             <FiRefreshCw className={isRefreshing ? "spin-animation" : ""} />
             <span>{isRefreshing ? "Refreshing..." : "Refresh"}</span>
           </button>
-          <MediaTrackLogo />
+        
         </div>
       </header>
 

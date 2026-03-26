@@ -565,6 +565,9 @@ const PackagingPage = () => {
   return (
     <div className="packaging-page-wrapper">
       <div className="nav-header-packaging">
+        <div className="top-right-logo-wrapper">
+        <MediaTrackLogo size={36} gap={8} />
+      </div>
         <button onClick={() => navigate("/operator")} className="btn-back-link">
           <FiArrowLeft /> Back to Platform Dashboard
         </button>
@@ -592,7 +595,7 @@ const PackagingPage = () => {
           <button className="btn-refresh-system" onClick={fetchData} disabled={isRefreshing}>
             <FiRefreshCw className={isRefreshing ? "spin" : ""} /> Refresh System
           </button>
-          <MediaTrackLogo size={28} />
+         
         </div>
       </header>
 

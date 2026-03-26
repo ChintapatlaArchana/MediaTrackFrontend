@@ -473,6 +473,9 @@ const CDNPage = () => {
 
   return (
     <div className="cdn-page-wrapper">
+      <div className="top-right-logo-wrapper">
+        <MediaTrackLogo size={36} gap={8} />
+      </div>
       <div className="nav-container-top">
         <button onClick={() => navigate("/operator")} className="btn-back-link">
           <FiArrowLeft /> Back to Platform Dashboard
@@ -494,7 +497,7 @@ const CDNPage = () => {
             <FiRefreshCw className={isLoading ? "spin-animation" : ""} />
             <span>{isLoading ? "Refreshing..." : "Refresh"}</span>
           </button>
-          <MediaTrackLogo />
+       
         </div>
       </header>
 

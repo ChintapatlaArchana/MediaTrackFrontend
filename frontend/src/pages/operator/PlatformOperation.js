@@ -105,6 +105,9 @@ const PlatformOperation = () => {
 
   return (
     <div className="dashboard-container">
+      <div className="top-right-logo-wrapper">
+        <MediaTrackLogo size={36} gap={8} />
+      </div>
       {/* DASHBOARD HEADER */}
       <div className="dashboard-header">
         <div className="header-content">
@@ -125,9 +128,7 @@ const PlatformOperation = () => {
               <span className="dot" style={{ width: 8, height: 8, background: '#a371f7', borderRadius: '50%' }}></span>
               Live
             </div>
-            <div className="ms-3">
-              <MediaTrackLogo size={28} />
-            </div>
+            
           </div>
         </div>
       </div>

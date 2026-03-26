@@ -336,3 +336,38 @@
   color: #8b949e;
   font-size: 14px;
 }
+
+
+/* Ensure the parent container allows absolute positioning inside it */
+.dashboard-container {
+  position: relative;
+  min-height: 100vh;
+  padding: 2rem; /* Give the page some breathing room */
+}
+
+/* The wrapper for the logo */
+.top-right-logo-wrapper {
+  position: absolute;
+  top: 20px;    /* Distance from the top */
+  right: 30px;  /* Distance from the right */
+  z-index: 100; /* Ensures it stays above backgrounds or header effects */
+  
+  /* Optional: Adds a subtle hover effect to make it feel interactive */
+  transition: opacity 0.2s ease;
+  cursor: pointer;
+}
+
+.top-right-logo-wrapper:hover {
+  opacity: 0.8;
+}
+
+/* Responsive: Move it or hide it on small screens if it overlaps title */
+@media (max-width: 600px) {
+  .top-right-logo-wrapper {
+    top: 10px;
+    right: 15px;
+  }
+  
+  /* If you want to hide the text "MediaTrack" on mobile to save space: */
+  /* .top-right-logo-wrapper span { display: none; } */
+}
