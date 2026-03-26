@@ -27,7 +27,7 @@ export const Login = () => {
         } else if (role === "AdOps") {
           navigate("/manager-dashboard", { replace: true });
         } else if (role === "Operator") {
-          navigate("/manager-dashboard", { replace: true });
+          navigate("/operator", { replace: true });
         }else if (role === "Admin") {
           navigate("/admin", { replace: true });
         } else {
