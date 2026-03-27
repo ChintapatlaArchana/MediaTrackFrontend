@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { adminService } from '../../services/adminService';
-import { MediaTrackLogo } from '../MediaTrackLogo';
 import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip,
   ResponsiveContainer
@@ -79,7 +78,7 @@ export const Overview = () => {
 
   const formatCurrency = (value) => {
     const num = typeof value === 'number' ? value : parseFloat(value) || 0;
-    return '$' + num.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    return '₹' + num.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   };
 
   const formatWholeNumber = (value) => {
@@ -97,14 +96,14 @@ export const Overview = () => {
     if (active && payload && payload.length) {
       return (
         <div style={{
-          background: 'rgba(17, 21, 35, 0.95)',
-          border: '1px solid rgba(140, 103, 255, 0.3)',
+          background: 'rgba(13, 13, 13, 0.95)',
+          border: '1px solid rgba(147, 51, 234, 0.3)',
           borderRadius: '8px',
           padding: '8px 12px',
           fontSize: '0.85rem'
         }}>
           <p style={{ color: '#aaa', margin: 0, marginBottom: 4 }}>{label}</p>
-          <p style={{ color: '#BBA6FF', margin: 0, fontWeight: 600 }}>
+          <p style={{ color: '#C084FC', margin: 0, fontWeight: 600 }}>
             {prefix}{payload[0].value.toLocaleString()}
           </p>
         </div>
@@ -115,14 +114,11 @@ export const Overview = () => {
 
   return (
     <div className="dashboard-content">
-      {/* Header row with title on left, logo on right */}
+      {/* Header row with title on left */}
       <div className="page-header d-flex justify-content-between align-items-start">
         <div>
           <h1 className="page-title">Executive Overview</h1>
           <p className="page-subtitle">Key performance indicators and business metrics</p>
-        </div>
-        <div style={{ opacity: 0.85 }}>
-          <MediaTrackLogo size={40} showText={true} />
         </div>
       </div>
 
@@ -156,7 +152,7 @@ export const Overview = () => {
               <div className="metric-card">
                 <div className="metric-header">
                   <span>MRR (This Month)</span>
-                  <i className="bi bi-currency-dollar"></i>
+                  <i className="bi bi-currency-rupee"></i>
                 </div>
                 <div className="metric-value">{formatCurrency(metrics.mrr)}</div>
               </div>
@@ -216,7 +212,7 @@ export const Overview = () => {
             </div>
 
             {/* Row 3: Upcoming Renewals, Open Alerts */}
-            <div className="col-md-6">
+            <div className="col-md-3">
               <div className="metric-card">
                 <div className="metric-header">
                   <span>Upcoming Renewals</span>
@@ -227,7 +223,7 @@ export const Overview = () => {
               </div>
             </div>
 
-            <div className="col-md-6">
+            <div className="col-md-3">
               <div className="metric-card">
                 <div className="metric-header">
                   <span>Open Alerts</span>
@@ -250,7 +246,7 @@ export const Overview = () => {
                   {mrrHistory.length > 0 ? (
                     <ResponsiveContainer width="100%" height="100%">
                       <LineChart data={mrrHistory} margin={{ top: 5, right: 20, left: 10, bottom: 5 }}>
-                        <CartesianGrid stroke="rgba(140, 103, 255, 0.12)" strokeDasharray="3 3" />
+                        <CartesianGrid stroke="rgba(147, 51, 234, 0.12)" strokeDasharray="3 3" />
                         <XAxis
                           dataKey="month"
                           stroke="#555"
@@ -262,14 +258,14 @@ export const Overview = () => {
                           tick={{ fill: '#888', fontSize: 12 }}
                           axisLine={{ stroke: '#333' }}
                         />
-                        <Tooltip content={<ChartTooltip prefix="$" />} />
+                        <Tooltip content={<ChartTooltip prefix="₹" />} />
                         <Line
                           type="monotone"
-                          dataKey="mrr"
-                          stroke="#8C67FF"
+                          dataKey="value"
+                          stroke="#9333EA"
                           strokeWidth={2.5}
-                          dot={{ fill: '#8C67FF', stroke: '#8C67FF', strokeWidth: 2, r: 4 }}
-                          activeDot={{ r: 6, fill: '#BBA6FF', stroke: '#8C67FF', strokeWidth: 2 }}
+                          dot={{ fill: '#9333EA', stroke: '#9333EA', strokeWidth: 2, r: 4 }}
+                          activeDot={{ r: 6, fill: '#C084FC', stroke: '#9333EA', strokeWidth: 2 }}
                         />
                       </LineChart>
                     </ResponsiveContainer>
@@ -292,7 +288,7 @@ export const Overview = () => {
                   {subsHistory.length > 0 ? (
                     <ResponsiveContainer width="100%" height="100%">
                       <LineChart data={subsHistory} margin={{ top: 5, right: 20, left: 10, bottom: 5 }}>
-                        <CartesianGrid stroke="rgba(140, 103, 255, 0.12)" strokeDasharray="3 3" />
+                        <CartesianGrid stroke="rgba(147, 51, 234, 0.12)" strokeDasharray="3 3" />
                         <XAxis
                           dataKey="month"
                           stroke="#555"
@@ -307,11 +303,11 @@ export const Overview = () => {
                         <Tooltip content={<ChartTooltip />} />
                         <Line
                           type="monotone"
-                          dataKey="count"
-                          stroke="#8C67FF"
+                          dataKey="value"
+                          stroke="#9333EA"
                           strokeWidth={2.5}
-                          dot={{ fill: '#8C67FF', stroke: '#8C67FF', strokeWidth: 2, r: 4 }}
-                          activeDot={{ r: 6, fill: '#BBA6FF', stroke: '#8C67FF', strokeWidth: 2 }}
+                          dot={{ fill: '#9333EA', stroke: '#9333EA', strokeWidth: 2, r: 4 }}
+                          activeDot={{ r: 6, fill: '#C084FC', stroke: '#9333EA', strokeWidth: 2 }}
                         />
                       </LineChart>
                     </ResponsiveContainer>

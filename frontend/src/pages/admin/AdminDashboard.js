@@ -1,6 +1,7 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { Sidebar } from './Sidebar';
+import { MediaTrackLogo } from '../MediaTrackLogo';
 import './AdminDashboard.css';
 
 // Placeholder components for the routes
@@ -17,7 +18,10 @@ export const AdminDashboard = () => {
   return (
     <div className="admin-layout">
       <Sidebar />
-      <main className="admin-main-content">
+      <main className="admin-main-content" style={{ position: 'relative' }}>
+        <div style={{ position: 'absolute', top: '2rem', right: '2.5rem', zIndex: 100 }}>
+           <MediaTrackLogo size={32} />
+        </div>
         <Routes>
           <Route path="/" element={<Navigate to="/admin/overview" replace />} />
           <Route path="/overview" element={<Overview />} />
