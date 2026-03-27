@@ -1,0 +1,318 @@
+/* Custom styling for Ad Ops Manager matching Platform Operations theme */
+.ad-ops-manager {
+    background: radial-gradient(circle at top, #0f172a, #020617);
+    color: #f8fafb;
+    min-height: 100vh;
+    padding: 28px 36px;
+    font-family: Inter, system-ui;
+}
+
+.static-header {
+    /* position: sticky;
+    top: 0; */
+    /* Transparent helps it meld into the gradient naturally */
+    background: transparent;
+    z-index: 1000;
+    padding-bottom: 0px;
+    padding-top: 10px;
+}
+
+.page-title {
+    font-weight: 700;
+    color: #efe7e7;
+    margin-bottom: 0;
+    font-size: 24px;
+}
+
+.header-divider {
+    border-top: 1px solid #1f2937;
+    margin: 10px 0 10px;
+}
+
+.page-subtitle {
+    color: #9ca3af;
+    font-size: 13px;
+    margin-bottom: 30px;
+}
+
+/* Action Cards */
+.action-card {
+    background: linear-gradient(180deg, #0b1220, #020617);
+    border: 1px solid #1f2937;
+    border-radius: 16px;
+    color: #23252b;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    height: 100%;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+}
+
+.action-card:hover {
+    transform: translateY(-4px);
+    border-color: #8b5cf6;
+    color: #0c0d0e;
+}
+
+.action-card-body {
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.action-icon {
+    width: 38px;
+    height: 38px;
+    background: linear-gradient(135deg, #7c3aed, #a855f7);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    padding: 8px; /* Added padding to ensure SVG looks good inside the box */
+    box-sizing: border-box;
+    margin-bottom: 15px;
+}
+
+.action-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: #ffffff;
+}
+
+.action-subtitle {
+    font-size: 12px;
+    color: #9ca3af;
+}
+
+/* KPI Cards */
+.kpi-card {
+    background: linear-gradient(180deg, #0b1220, #020617);
+    border-radius: 16px;
+    border: 1px solid #1f2937;
+    padding: 18px;
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.kpi-icon-wrapper {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: rgba(139, 92, 246, 0.2);
+    color: #a78bfa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    margin-right: 18px;
+}
+
+.kpi-content {
+    flex: 1;
+}
+
+.kpi-label, .kpi-desc {
+    color: #9ca3af;
+    font-size: 12px;
+    margin-bottom: 0;
+}
+
+.kpi-desc {
+    margin-top: 4px;
+}
+
+.kpi-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.trend-positive {
+    color: #00d27a;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.trend-negative {
+    color: #ef4444;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.trend-neutral {
+    color: #6b7280;
+    font-size: 12px;
+}
+
+/* Active Campaigns Section */
+.active-campaigns-wrapper {
+    /* Muted background tint matching operator slate */
+    background: radial-gradient(circle at center, rgba(15, 23, 42, 0.88), rgba(2, 6, 23, 0.95)); 
+    /* url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80'); */
+    background-size: cover;
+    background-position: center;
+    border-radius: 16px;
+    padding: 24px;
+    position: relative;
+    border: 1px solid #1f2937;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.section-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+    color: #111111;
+}
+
+.view-all-link {
+    color: #a855f7;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.view-all-link:hover {
+    color: #c084fc;
+    text-decoration: underline;
+}
+
+.campaign-card {
+    background: #020617;
+    border-radius: 12px;
+    border: 1px solid #1f2937;
+    margin-bottom: 16px;
+    padding: 16px;
+    /* transition: background-color 0.2s, border-color 0.2s;
+    cursor: pointer; */
+}
+
+.campaign-card:hover {
+    background: #0b1220;
+    border-color: #8b5cf6;
+}
+
+.campaign-card .row {
+    align-items: center;
+    margin: 0;
+}
+
+.campaign-thumb {
+    width: 60px;
+    height: 80px;
+    border-radius: 8px;
+    object-fit: cover;
+    margin-right: 16px;
+    background-color: #1f2937;
+}
+
+.campaign-info {
+    display: flex;
+    align-items: center;
+    padding-left: 0; 
+}
+
+.campaign-name {
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 6px;
+    color: #e5e7eb;
+}
+
+.status-badge {
+    font-size: 10px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.status-active {
+    background: rgba(139, 92, 246, 0.15);
+    color: #a78bfa;
+    border: 1px solid rgba(139, 92, 246, 0.2);
+}
+
+.status-paused {
+    background: rgba(234, 179, 8, 0.15);
+    color: #facc15;
+    border: 1px solid rgba(234, 179, 8, 0.2);
+}
+
+.metric-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.metric-label {
+    color: #9ca3af;
+    font-size: 12px;
+    margin-bottom: 4px;
+}
+
+.metric-val {
+    font-weight: 600;
+    font-size: 14px;
+    color: #a855f7; /* Matching violet accents */
+}
+
+.budget-info {
+    padding-right: 0;
+}
+
+.budget-label {
+    color: #9ca3af;
+    font-size: 12px;
+    margin-bottom: 4px;
+}
+
+.budget-val {
+    font-weight: 600;
+    font-size: 14px;
+    color: #24262a;
+    margin-bottom: 8px;
+}
+
+.progress-container {
+    width: 100%;
+}
+
+.progress {
+    height: 6px;
+    background: #1f2937;
+    border-radius: 10px;
+    margin-bottom: 4px;
+}
+
+.progress-bar {
+    background: linear-gradient(90deg, #7c3aed 0%, #a855f7 100%);
+    border-radius: 10px;
+}
+
+.progress-text {
+    font-size: 11px;
+    color: #6b7280;
+    text-align: right;
+    display: block;
+}
+
+.card-link-wrapper {
+    text-decoration: none;
+    display: block;
+    height: 100%;
+}
