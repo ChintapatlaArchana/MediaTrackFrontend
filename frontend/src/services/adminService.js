@@ -40,6 +40,16 @@ export const adminService = {
     return resp.data;
   },
 
+  getNetAdds: async () => {
+    const resp = await axios.get(`${API_URL}/subscription/admin/netAdds`, getAuthHeaders());
+    return resp.data;
+  },
+
+  getMonthlyAdRevenueStats: async () => {
+    const resp = await axios.get(`${API_URL}/adDeliveryReport/admin/monthlyAdRevenueStats`, getAuthHeaders());
+    return resp.data;
+  },
+  
   getMonthlyAdRevenue: async () => {
     const resp = await axios.get(`${API_URL}/adDeliveryReport/admin/monthlyAdRevenue`, getAuthHeaders());
     return resp.data;
@@ -55,8 +65,8 @@ export const adminService = {
     return resp.data;
   },
 
-  getUpcomingRenewals: async () => {
-    const resp = await axios.get(`${API_URL}/subscription/admin/renewals`, getAuthHeaders());
+  getUpcomingRenewals: async (page = 0, size = 10) => {
+    const resp = await axios.get(`${API_URL}/subscription/admin/renewals?page=${page}&size=${size}`, getAuthHeaders());
     return resp.data;
   },
 
@@ -68,7 +78,7 @@ export const adminService = {
   // ── Chart Endpoints ──
 
   getMRRHistory: async () => {
-    const resp = await axios.get(`${API_URL}/subscription/admin/charts.mrr-history`, getAuthHeaders());
+    const resp = await axios.get(`${API_URL}/subscription/admin/charts/mrr-history`, getAuthHeaders());
     return resp.data;
   },
 
@@ -108,30 +118,140 @@ export const adminService = {
     }
   },
 
-  getEngagementMetrics: async () => {
-    try {
-       const resp = await axios.get(`${API_URL}/analytics/engagement`, getAuthHeaders());
-       return resp.data;
-    } catch (e) {
-       return { dau: 0, mau: 0, completionRate: 0, avgBitrate: '0 Mbps' };
-    }
-  },
 
-  getAdDeliveryReports: async () => {
-     try {
-       const resp = await axios.get(`${API_URL}/analytics/addelivery`, getAuthHeaders());
-       return resp.data;
-     } catch (e) {
-       return [];
-     }
-  },
-
-  getNotifications: async () => {
+  getActiveSubscribersChart: async () => {
     try {
-      const resp = await axios.get(`${API_URL}/notification/getAll`, getAuthHeaders());
+      const resp = await axios.get(`${API_URL}/subscription/admin/plan-distribution`, getAuthHeaders());
       return resp.data;
     } catch (e) {
       return [];
     }
+  },
+
+  getEngagementMetrics: async () => {
+    try {
+      const resp = await axios.get(`${API_URL}/analytics/engagement`, getAuthHeaders());
+      return resp.data;
+    } catch (e) {
+      return { dau: 0, mau: 0, completionRate: 0, avgBitrate: '0 Mbps' };
+    }
+  },
+
+  getAdDeliveryReports: async () => {
+    try {
+      const resp = await axios.get(`${API_URL}/analytics/addelivery`, getAuthHeaders());
+      return resp.data;
+    } catch (e) {
+      return [];
+    }
+  },
+
+  // ── New Dynamic Data Endpoints ──
+
+  getMrrByPlan: async () => {
+    const resp = await axios.get(`${API_URL}/subscription/admin/charts/mrr-by-plan`, getAuthHeaders());
+    return resp.data;
+  },
+
+  getSubscriptionRevenueHistory: async () => {
+    const resp = await axios.get(`${API_URL}/subscription/admin/charts/revenue-history`, getAuthHeaders());
+    return resp.data;
+  },
+
+  getAdRevenueHistory: async () => {
+    const resp = await axios.get(`${API_URL}/adDeliveryReport/admin/charts/revenue-history`, getAuthHeaders());
+    return resp.data;
+  },
+
+  getARPUByPlan: async () => {
+    const resp = await axios.get(`${API_URL}/subscription/admin/charts/arpu-distribution`, getAuthHeaders());
+    return resp.data;
+  },
+
+  getAdYieldTrends: async () => {
+    const resp = await axios.get(`${API_URL}/analytics/admin/ad-yield`, getAuthHeaders());
+    return resp.data;
+  },
+
+  getPlatformCTR: async () => {
+    const resp = await axios.get(`${API_URL}/analytics/admin/ctr-fill`, getAuthHeaders());
+    return resp.data;
+  },
+
+  getRenewalMetrics: async () => {
+    const resp = await axios.get(`${API_URL}/subscription/admin/renewal-metrics`, getAuthHeaders());
+    return resp.data;
+  },
+
+  getAudienceTrends: async () => {
+    const resp = await axios.get(`${API_URL}/engagementReport/admin/engagement-trends`, getAuthHeaders());
+    return resp.data;
+  },
+
+  getEngagementKPIs: async () => {
+    const resp = await axios.get(`${API_URL}/engagementReport/admin/engagement-kpis`, getAuthHeaders());
+    return resp.data;
+  },
+
+  getWatchTimeTrends: async () => {
+    const resp = await axios.get(`${API_URL}/engagementReport/admin/watch-time-trends`, getAuthHeaders());
+    return resp.data;
+  },
+
+  getRoleDistribution: async () => {
+    const resp = await axios.get(`${API_URL}/user/admin/role-distribution`, getAuthHeaders());
+    return resp.data;
+  },
+
+  getExpiringGrants: async () => {
+    const resp = await axios.get(`${API_URL}/entitlement/admin/expiry-stats`, getAuthHeaders());
+    return resp.data;
+  },
+
+  getEntitlementDistribution: async () => {
+    const resp = await axios.get(`${API_URL}/entitlement/admin/entitlement-distribution`, getAuthHeaders());
+    return resp.data;
+  },
+
+  getPolicyDrift: async (page = 0, size = 10) => {
+    const resp = await axios.get(`${API_URL}/entitlement/admin/policy-drift?page=${page}&size=${size}`, getAuthHeaders());
+    return resp.data;
+  },
+
+  getAdminStats: async () => {
+    const resp = await axios.get(`${API_URL}/user/admin/admin-stats`, getAuthHeaders());
+    return resp.data;
+  },
+
+  getNotifications: async () => {
+    try {
+      const resp = await axios.get(`${API_URL}/notification/admin/getAll`, getAuthHeaders());
+      return resp.data;
+    } catch (e) {
+      return [];
+    }
+  },
+  markAllNotificationsRead: async () => {
+    try {
+      const resp = await axios.put(`${API_URL}/notification/admin/mark-all-read`, getAuthHeaders());
+      return resp.data;
+    } catch (e) {
+      return [];
+    }
+  },
+  // In adminService.js
+  addPlan: async (planData) => {
+    const resp = await axios.post(`${API_URL}/plan/admin/add`, planData, getAuthHeaders());
+    return resp.data;
+  },
+
+  updatePlan: async (planId, planData) => {
+    const resp = await axios.put(`${API_URL}/plan/admin/update/${planId}`, planData, getAuthHeaders());
+    return resp.data;
+  },
+
+  deletePlan: async (planId) => {
+    const resp = await axios.delete(`${API_URL}/plan/admin/delete/${planId}`, getAuthHeaders());
+    return resp.data;
   }
 };

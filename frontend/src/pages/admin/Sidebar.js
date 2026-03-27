@@ -15,9 +15,6 @@ export const Sidebar = () => {
   return (
     <aside className="admin-sidebar">
       <div className="admin-sidebar-header">
-        {/* <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <i className="bi bi-grid-1x2" style={{ fontSize: '1.5rem', color: '#8C67FF' }}></i>
-        </div> */}
         <div className="sidebar-header-text" style={{ marginTop: '0.75rem' }}>
           <h6 className="text-light mb-0 fw-bold">Admin Dashboard</h6>
           <small className="text-secondary">Executive Overview</small>
@@ -38,6 +35,16 @@ export const Sidebar = () => {
       </nav>
 
       <div className="admin-sidebar-footer">
+        <div className="profile-popover">
+          <button className="popover-item">
+            <i className="bi bi-gear"></i>
+            <span>Settings</span>
+          </button>
+          <button className="popover-item logout-item">
+            <i className="bi bi-box-arrow-right"></i>
+            <span>Logout</span>
+          </button>
+        </div>
         <div className="admin-avatar">
           A
         </div>

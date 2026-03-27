@@ -1,22 +1,88 @@
 import React, { useState, useEffect } from 'react';
+import ReactECharts from 'echarts-for-react';
 import { adminService } from '../../services/adminService';
+import './Renewals.css';
 
 export const Renewals = () => {
-  const [metrics, setMetrics] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [renewals, setRenewals] = useState([]);
+  const [metrics, setMetrics] = useState({
+     renewalsDue: 0,
+     statusMix: [],
+     graceOutcomes: { returned: 0, lapsed: 0 }
+  });
+  const [totalPages, setTotalPages] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const rowsPerPage = 10;
 
+  // Initial fetch for renewal metrics
   useEffect(() => {
-    // Mock fetching complex renewals data
-    setTimeout(() => {
-       setMetrics({
-          renewalsDue: 24,
-          statusMix: { active: 85, grace: 5, lapsed: 7, cancelled: 3 },
-          graceOutcomes: { returned: 70, lapsed: 30 },
-          pipeline: { lessThan7: 8, sevenTo14: 6, fifteenTo30: 10 }
-       });
-       setLoading(false);
-    }, 600);
+    const fetchMetrics = async () => {
+      try {
+        const metricsData = await adminService.getRenewalMetrics();
+        setMetrics({
+          renewalsDue: metricsData?.renewalsDue || 0,
+          statusMix: metricsData?.statusMix || [],
+          graceOutcomes: metricsData?.graceOutcomes || { returned: 0, lapsed: 0 }
+        });
+      } catch (e) {
+        console.error("Error fetching renewal metrics:", e);
+      }
+    };
+    fetchMetrics();
   }, []);
+
+  // Fetch paginated renewals
+  useEffect(() => {
+    const fetchRenewals = async () => {
+      try {
+        setLoading(true);
+        const response = await adminService.getUpcomingRenewals(currentPage - 1, rowsPerPage);
+        // Expecting { content: [], totalPages: 0 } from backend
+        setRenewals(response.content || response || []);
+        setTotalPages(response.totalPages || 0);
+      } catch (e) {
+        console.error("Error fetching renewals:", e);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchRenewals();
+  }, [currentPage]);
+
+  const statusMixOption = {
+    backgroundColor: 'transparent',
+    tooltip: { 
+      trigger: 'item', 
+      formatter: '{b}: {c}%',
+      backgroundColor: 'rgba(13, 13, 13, 0.95)',
+      borderColor: 'rgba(255, 255, 255, 0.1)',
+      textStyle: { color: '#fff' }
+    },
+    legend: {
+      orient: 'vertical',
+      right: '5%',
+      top: 'center',
+      textStyle: { color: '#888' },
+      icon: 'circle'
+    },
+    series: [
+      {
+        name: 'Status Mix',
+        type: 'pie',
+        radius: ['50%', '80%'],
+        center: ['35%', '50%'],
+        avoidLabelOverlap: false,
+        label: { show: false },
+        emphasis: { label: { show: false } },
+        data: metrics?.statusMix || [],
+        itemStyle: {
+          borderRadius: 2
+        },
+        color: ['#10B981', '#F59E0B', '#9333EA', '#EF4444']
+      }
+    ]
+  };
 
   return (
     <div className="dashboard-content">
@@ -25,127 +91,130 @@ export const Renewals = () => {
            <h1 className="page-title">Renewals & Lifecycle</h1>
            <p className="page-subtitle">Subscription lifecycle and upcoming renewals</p>
         </div>
-        <select className="form-select bg-dark text-light border-secondary" style={{ width: 'auto' }}>
-           <option>Status: All</option>
-           <option>Status: Active</option>
-           <option>Status: Grace</option>
-           <option>Status: Lapsed</option>
-        </select>
       </div>
 
       {loading ? (
           <div className="text-center mt-5"><div className="spinner-border text-light" role="status"></div></div>
       ) : (
-          <div className="row g-4">
-             <div className="col-md-3">
-                 <div className="metric-card">
-                  <div className="metric-header">
-                    <span>Renewals Due</span>
-                    <i className="bi bi-calendar-event"></i>
+          <React.Fragment>
+            <div className="row g-4 mb-4">
+              <div className="col-md-3">
+                  <div className="metric-card" style={{ height: 'auto' }}>
+                    <div className="metric-header">
+                      <span>Renewals Due</span>
+                      <i className="bi bi-calendar-event"></i>
+                    </div>
+                    <div className="metric-value">{metrics.renewalsDue}</div>
+                    <div className="metric-sub text-secondary">Next 30 Days</div>
                   </div>
-                  <div className="metric-value">{metrics.renewalsDue}</div>
-                  <div className="metric-sub text-secondary">Next 30 Days</div>
-                </div>
-             </div>
-             
-             <div className="col-md-5">
-                 <div className="metric-card">
-                  <div className="metric-header mb-4">
-                    <span>Status Mix</span>
-                    <i className="bi bi-pie-chart"></i>
+              </div>
+              
+              <div className="col-md-5">
+                  <div className="metric-card" style={{ height: 'auto' }}>
+                    <div className="metric-header mb-0">
+                      <span>Status Mix</span>
+                      <i className="bi bi-pie-chart"></i>
+                    </div>
+                    <div style={{ height: '140px' }}>
+                       <ReactECharts option={statusMixOption} style={{ height: '100%', width: '100%' }} />
+                    </div>
                   </div>
-                  <div className="d-flex w-100 mb-2">
-                     <div style={{ width: `${metrics.statusMix.active}%`, height: '12px', backgroundColor: 'var(--mt-success)' }} title="Active"></div>
-                     <div style={{ width: `${metrics.statusMix.grace}%`, height: '12px', backgroundColor: 'var(--mt-warning)' }} title="Grace"></div>
-                     <div style={{ width: `${metrics.statusMix.lapsed}%`, height: '12px', backgroundColor: 'var(--mt-purple-primary)' }} title="Lapsed"></div>
-                     <div style={{ width: `${metrics.statusMix.cancelled}%`, height: '12px', backgroundColor: 'var(--mt-danger)' }} title="Cancelled"></div>
-                  </div>
-                  <div className="d-flex justify-content-between text-secondary small mt-3">
-                     <span><i className="bi bi-circle-fill text-success" style={{fontSize:'8px'}}></i> Active ({metrics.statusMix.active}%)</span>
-                     <span><i className="bi bi-circle-fill text-warning" style={{fontSize:'8px'}}></i> Grace ({metrics.statusMix.grace}%)</span>
-                     <span><i className="bi bi-circle-fill" style={{color:'var(--mt-purple-primary)', fontSize:'8px'}}></i> Lapsed ({metrics.statusMix.lapsed}%)</span>
-                     <span><i className="bi bi-circle-fill text-danger" style={{fontSize:'8px'}}></i> Cancelled ({metrics.statusMix.cancelled}%)</span>
-                  </div>
-                </div>
-             </div>
+              </div>
 
-             <div className="col-md-4">
-                 <div className="metric-card">
-                  <div className="metric-header mb-3">
-                    <span>Grace Outcomes</span>
-                    <i className="bi bi-arrow-left-right"></i>
+              <div className="col-md-4">
+                  <div className="metric-card" style={{ height: 'auto' }}>
+                    <div className="metric-header mb-3">
+                      <span>Grace Outcomes</span>
+                      <i className="bi bi-arrow-left-right"></i>
+                    </div>
+                    <div className="d-flex justify-content-between mb-2">
+                        <span className="text-secondary small">Returned to Active</span>
+                        <span className="fw-bold text-success">{metrics.graceOutcomes.returned}%</span>
+                    </div>
+                    <div className="progress mb-3" style={{ height: '6px', backgroundColor: 'var(--mt-bg-dark)' }}>
+                        <div className="progress-bar bg-success" role="progressbar" style={{ width: `${metrics.graceOutcomes.returned}%`}}></div>
+                    </div>
+
+                    <div className="d-flex justify-content-between mb-2">
+                        <span className="text-secondary small">Churned (Lapsed)</span>
+                        <span className="fw-bold text-danger">{metrics.graceOutcomes.lapsed}%</span>
+                    </div>
+                    <div className="progress" style={{ height: '6px', backgroundColor: 'var(--mt-bg-dark)' }}>
+                        <div className="progress-bar bg-danger" role="progressbar" style={{ width: `${metrics.graceOutcomes.lapsed}%`}}></div>
+                    </div>
                   </div>
-                  <div className="d-flex justify-content-between mb-2">
-                      <span className="text-secondary small">Returned to Active</span>
-                      <span className="fw-bold text-success">{metrics.graceOutcomes.returned}%</span>
+              </div>
+            </div>
+
+            <div className="row g-4">
+              <div className="col-12">
+                <div className="metric-card p-4" style={{ height: 'auto' }}>
+                  <div className="metric-header mb-4">
+                    <span>Upcoming Renewals (Next 30 Days)</span>
+                    <i className="bi bi-table"></i>
                   </div>
-                  <div className="progress mb-3" style={{ height: '6px', backgroundColor: 'var(--mt-bg-dark)' }}>
-                      <div className="progress-bar bg-success" role="progressbar" style={{ width: `${metrics.graceOutcomes.returned}%`}}></div>
+                  
+                  <div className="renewals-table-container">
+                    <table className="renewals-table">
+                      <thead>
+                        <tr>
+                          <th>Plan Name</th>
+                          <th>User Email</th>
+                          <th>Billing Cycle</th>
+                          <th>End Date</th>
+                          <th>Days Until</th>
+                          <th>Status</th>
+                          <th>Price</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {renewals.map((r) => (
+                          <tr key={r.id}>
+                            <td className="plan-name">{r.plan}</td>
+                            <td className="user-email">{r.email}</td>
+                            <td>{r.cycle}</td>
+                            <td className="date-col">{r.endDate}</td>
+                            <td>
+                              <span className="days-until-badge">{r.days}</span>
+                            </td>
+                            <td>
+                              <span className={`status-badge ${r.status}`}>{r.status}</span>
+                            </td>
+                            <td className="price-col">{r.price}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
                   </div>
 
-                  <div className="d-flex justify-content-between mb-2">
-                      <span className="text-secondary small">Churned (Lapsed)</span>
-                      <span className="fw-bold text-danger">{metrics.graceOutcomes.lapsed}%</span>
-                  </div>
-                  <div className="progress" style={{ height: '6px', backgroundColor: 'var(--mt-bg-dark)' }}>
-                      <div className="progress-bar bg-danger" role="progressbar" style={{ width: `${metrics.graceOutcomes.lapsed}%`}}></div>
-                  </div>
-                </div>
-             </div>
-
-             <div className="col-md-6">
-                 <div className="metric-card">
-                  <div className="metric-header mb-4">
-                    <span>Renewals Pipeline</span>
-                    <i className="bi bi-funnel"></i>
-                  </div>
-                  <div className="pe-3">
-                     <div className="mb-3">
-                        <div className="d-flex justify-content-between mb-1 small">
-                           <span>Due &lt; 7 Days</span>
-                           <span className="text-secondary fw-bold">{metrics.pipeline.lessThan7}</span>
-                        </div>
-                        <div className="progress" style={{ height: '8px', backgroundColor: 'var(--mt-bg-dark)' }}>
-                           <div className="progress-bar bg-danger" role="progressbar" style={{ width: '33%' }}></div>
-                        </div>
-                     </div>
-                     <div className="mb-3">
-                        <div className="d-flex justify-content-between mb-1 small">
-                           <span>Due 7-14 Days</span>
-                           <span className="text-secondary fw-bold">{metrics.pipeline.sevenTo14}</span>
-                        </div>
-                        <div className="progress" style={{ height: '8px', backgroundColor: 'var(--mt-bg-dark)' }}>
-                           <div className="progress-bar bg-warning" role="progressbar" style={{ width: '25%' }}></div>
-                        </div>
-                     </div>
-                     <div className="mb-3">
-                        <div className="d-flex justify-content-between mb-1 small">
-                           <span>Due 15-30 Days</span>
-                           <span className="text-secondary fw-bold">{metrics.pipeline.fifteenTo30}</span>
-                        </div>
-                        <div className="progress" style={{ height: '8px', backgroundColor: 'var(--mt-bg-dark)' }}>
-                           <div className="progress-bar" role="progressbar" style={{ width: '42%', backgroundColor: 'var(--mt-purple-primary)' }}></div>
-                        </div>
-                     </div>
-                  </div>
-                </div>
-             </div>
-             
-             <div className="col-md-6">
-                 <div className="metric-card">
-                  <div className="metric-header mb-4">
-                    <span>Cancellations vs Reactivations (6m)</span>
-                    <i className="bi bi-bar-chart"></i>
-                  </div>
-                  <div className="d-flex h-100 align-items-center justify-content-center">
-                      <div className="text-center text-secondary">
-                         <i className="bi bi-bar-chart-line fs-1 mb-2 d-block text-white-50"></i>
-                         <small>Grouped Column Chart Placeholder</small>
+                  {/* Pagination Controls */}
+                  {renewals.length > 0 && (
+                    <div className="table-pagination">
+                      <div className="pagination-info">
+                        Page {currentPage} of {totalPages || 1}
                       </div>
-                   </div>
+                      <div className="pagination-btns">
+                        <button 
+                          className="pag-btn" 
+                          onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                          disabled={currentPage === 1}
+                        >
+                          <i className="bi bi-chevron-left"></i>
+                        </button>
+                        <button 
+                          className="pag-btn" 
+                          onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+                          disabled={currentPage >= totalPages}
+                        >
+                          <i className="bi bi-chevron-right"></i>
+                        </button>
+                      </div>
+                    </div>
+                  )}
                 </div>
-             </div>
-          </div>
+              </div>
+            </div>
+          </React.Fragment>
       )}
     </div>
   );
