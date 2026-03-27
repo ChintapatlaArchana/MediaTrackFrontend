@@ -847,7 +847,7 @@ const IngestPage = () => {
           <span className="stat-label">Queued Jobs</span>
         </div>
         <div className="stat-card border-progress">
-          <span className="stat-value light-purple-text">{metrics.inProgress || 0}</span>
+          <span className="stat-value light-purple-text">{metrics.in_progress || 0}</span>
           <span className="stat-label">In Progress</span>
         </div>
         <div className="stat-card border-completed">

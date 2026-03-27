@@ -20,7 +20,7 @@ import "../../styles/operator.css";
 const PlatformOperation = () => {
   const navigate = useNavigate();
   const [data, setData] = useState({
-    ingest: { active: 0, queued: 0, completed: 0, health: 0, trend: "0%" },
+    ingest: { in_progress: 0, queued: 0, completed: 0, health: 0, trend: "0%" },
     packaging: { passed: 0, failed: 0, pending: 0, health: 0, trend: "0%" },
     cdn: { active: 0, total: 0, throughput: "0 Gbps", health: 0, trend: "0%" },
     drm: { granted: 0, denied: 0, rate: "0%", health: 0, trend: "0%" },
@@ -58,7 +58,7 @@ const PlatformOperation = () => {
 
   const newState = {
     ingest: { 
-      active: iM?.active ?? iM?.Active ?? prev.ingest.active, 
+    in_progress: iM?.in_progress ?? iM?. In_progress ?? prev.ingest.in_progress, 
       queued: iM?.queued ?? iM?.Queued ?? prev.ingest.queued,
       completed: iM?.completed ?? iM?.Completed ?? prev.ingest.completed,
       health: parseHealth(iH), // Handles the 66.666 value in your console
@@ -146,7 +146,7 @@ const PlatformOperation = () => {
           <h3>Ingest & Transcode</h3>
           <p>Monitor pipeline queue and job status</p>
           <div className="badge-container">
-            <div className="status-badge">active: {data.ingest.active}</div>
+            <div className="status-badge">in_progress: {data.ingest.in_progress}</div>
             <div className="status-badge">queued: {data.ingest.queued}</div>
             <div className="status-badge">completed: {data.ingest.completed}</div>
           </div>
@@ -182,7 +182,7 @@ const PlatformOperation = () => {
           <div className="badge-container">
             <div className="status-badge">active: {data.cdn.active}</div>
             <div className="status-badge">total: {data.cdn.total}</div>
-            <div className="status-badge">throughput: {data.cdn.throughput}</div>
+            
           </div>
         </div>
 

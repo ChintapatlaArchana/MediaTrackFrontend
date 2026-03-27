@@ -533,17 +533,17 @@ const PackagingPage = () => {
       if (resQ.status === 'fulfilled' && resQ.value) {
         const rawData = Array.isArray(resQ.value) ? resQ.value : [];
         
-        const mappedJobs = rawData.map(item => ({
-          // Backend uses 'assetId' or 'packageId'. If title is missing, we use assetId
-          title: item.title || `Asset #${item.assetId || item.id}`, 
-          packageId: `PKG-${item.packageId || item.id || '000'}`,
-          status: item.status || "Pending",
-          // Converting backend singular string 'format' to frontend array 'formats'
-          formats: item.format ? [item.format] : (Array.isArray(item.formats) ? item.formats : []),
-          // Converting backend singular string 'drm' to frontend array 'drm'
-          drm: item.drm ? [item.drm] : (Array.isArray(item.drm) ? item.drm : []),
-          notes: item.notes || "Validation complete. No issues found."
-        }));
+       const mappedJobs = rawData.map(item => ({
+  title: item.title || item.assetName || `Asset #${item.assetId || item.id}`, 
+  packageId: item.packageId || item.id || '000',
+  
+  // FIX: Ensure status isn't defaulting to "Pending" because of a wrong key
+  status: item.status || item.qcStatus || item.state || "Pending", 
+  
+  formats: Array.isArray(item.formats) ? item.formats : (item.format ? [item.format] : []),
+  drm: Array.isArray(item.drm) ? item.drm : (item.drm ? [item.drm] : []),
+  notes: item.notes || "Validation complete."
+}));
         
         setQcItems(mappedJobs);
       }
@@ -584,12 +584,7 @@ const PackagingPage = () => {
           </div>
         </div>
 
-        {healthScore !== null && (
-          <div className="header-health-indicator">
-            <FiActivity className="icon-gap" />
-            <span>System Health: <strong>{healthScore}%</strong></span>
-          </div>
-        )}
+        
 
         <div className="header-right-actions">
           <button className="btn-refresh-system" onClick={fetchData} disabled={isRefreshing}>
