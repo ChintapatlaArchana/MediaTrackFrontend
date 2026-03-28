@@ -1,7 +1,7 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { Sidebar } from './Sidebar';
-import { MediaTrackLogo } from '../MediaTrackLogo';
+import { MediaTrackLogo } from '../../MediaTrackLogo';
 import './AdminDashboard.css';
 
 // Placeholder components for the routes

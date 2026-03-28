@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaArrowLeft, FaSearch } from 'react-icons/fa';
-import { getAllCampaignsWithMetrics } from '../services/adOpsService'; 
+import { getAllCampaignsWithMetrics } from '../../services/adOpsService'; 
 
 const AllCampaigns = () => {
     const navigate = useNavigate();

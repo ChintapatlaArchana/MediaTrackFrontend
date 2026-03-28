@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { FiArrowLeft, FiX } from "react-icons/fi";
 import { BsCalendarEvent } from "react-icons/bs";
 // Import the custom logo component
-import {MediaTrackLogo} from "../MediaTrackLogo"; // Ensure path matches your project structure
+import {MediaTrackLogo} from "../../MediaTrackLogo"; // Ensure path matches your project structure
 import { createAsset, getIdByTitle } from "../../services/contentService";
 
 import "bootstrap/dist/css/bootstrap.min.css";

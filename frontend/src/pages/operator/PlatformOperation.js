@@ -12,7 +12,7 @@ import {
   FiSmile
 } from "react-icons/fi";
 import { FaWaveSquare } from "react-icons/fa";
-import { MediaTrackLogo } from "../MediaTrackLogo";
+import { MediaTrackLogo } from "../../MediaTrackLogo";
 // Import the main service object
 import { operatorService } from "../../api/operatorService"; 
 import "../../styles/operator.css";

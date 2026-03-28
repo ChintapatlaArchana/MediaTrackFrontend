@@ -6,7 +6,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { FiEdit2, FiTrash2, FiEye, FiArrowLeft, FiFilm, FiSearch } from "react-icons/fi";
 
 // Import the custom logo component
-import {MediaTrackLogo} from "../MediaTrackLogo"; 
+import {MediaTrackLogo} from "../../MediaTrackLogo"; 
 import { getAllTitles } from "../../services/contentService";
 
 import "bootstrap/dist/css/bootstrap.min.css";

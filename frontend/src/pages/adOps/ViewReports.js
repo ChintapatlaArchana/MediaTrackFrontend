@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaArrowLeft, FaChartLine } from 'react-icons/fa';
-import { getChartData } from '../services/adOpsService';
+import { getChartData } from '../../services/adOpsService';
 import {
   ComposedChart,
   Line,

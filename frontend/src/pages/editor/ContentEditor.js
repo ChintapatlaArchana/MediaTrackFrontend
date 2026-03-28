@@ -13,7 +13,7 @@ import {
 import { BsCalendar3, BsFilm } from "react-icons/bs";
 
 // Import the custom logo component
-import {MediaTrackLogo} from "../MediaTrackLogo"; // Ensure this path is correct
+import {MediaTrackLogo} from "../../MediaTrackLogo"; // Ensure this path is correct
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../styles/contentEditor.css";

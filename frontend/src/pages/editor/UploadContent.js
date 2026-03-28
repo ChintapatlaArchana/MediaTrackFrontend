@@ -3,7 +3,7 @@ import { Container, Row, Col, Card, Form, Button } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { FiUpload, FiArrowLeft } from "react-icons/fi";
 // Import your custom logo component
-import {MediaTrackLogo} from "../MediaTrackLogo"; // Adjust path as needed
+import {MediaTrackLogo} from "../../MediaTrackLogo"; // Adjust path as needed
 // Import your API services
 import { createTitle, getAllCategories } from "../../services/contentService"; 
 

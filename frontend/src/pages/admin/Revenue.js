@@ -52,7 +52,7 @@ export const Revenue = () => {
                netAdds: netAdds || 0,
                adRev: adStats?.adRev || 0,
                ctr: adStats?.ctr  || '0%',
-               fillRate: adStats?.fillData || '0%',
+               fillRate: adStats?.fillRate || '0%',
                ecpm: adStats?.ecpm || 0
             });
 
@@ -293,7 +293,6 @@ export const Revenue = () => {
                            <i className="bi bi-cash-stack"></i>
                         </div>
                         <div className="metric-value">₹{metrics.adRev.toFixed(0)}</div>
-                        <div className="metric-sub text-success">+12.5% vs last month</div>
                      </div>
                   </div>
                   <div className="col-md-3">
@@ -323,7 +322,6 @@ export const Revenue = () => {
                            <i className="bi bi-boxes"></i>
                         </div>
                         <div className="metric-value">{metrics.fillRate}</div>
-                        <div className="metric-sub text-success">Healthy inventory usage</div>
                      </div>
                   </div>
                </div>

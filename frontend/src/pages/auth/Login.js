@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./Login.css"; // <-- add this
-import { MediaTrackLogo } from "../MediaTrackLogo.js";
+import { MediaTrackLogo } from "../../MediaTrackLogo.js";
 import { Link } from "react-router-dom";
 
 export const Login = () => {

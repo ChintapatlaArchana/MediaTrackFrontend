@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa';
-import * as adOpsService from '../services/adOpsService';
+import * as adOpsService from '../../services/adOpsService';
 
 const CreateCampaign = () => {
     const navigate = useNavigate();

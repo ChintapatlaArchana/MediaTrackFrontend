@@ -3,7 +3,7 @@ import React from "react";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { MediaTrackLogo } from "../MediaTrackLogo";
+import { MediaTrackLogo } from "../../MediaTrackLogo";
 import { Link } from "react-router-dom";
 // If you want the same logo at top-right, uncomment below and render it.
 // import MediaTrackLogo from "./MediaTrackLogo";
