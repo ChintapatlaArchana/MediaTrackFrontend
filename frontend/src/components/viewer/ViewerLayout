@@ -1,0 +1,16 @@
+import React from 'react';
+import { Outlet } from 'react-router-dom';
+import ViewerSidebar from './ViewerSidebar';
+ 
+const ViewerLayout = () => {
+  return (
+    <div style={{ display: 'flex', backgroundColor: '#050508', minHeight: '100vh' }}>
+      <ViewerSidebar />
+      <div style={{ flex: 1, marginLeft: '80px', overflowX: 'hidden' }}>
+        <Outlet />
+      </div>
+    </div>
+  );
+};
+ 
+export default ViewerLayout;
