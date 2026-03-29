@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from "react";
 import { Container, Row, Col, Card, Spinner, Alert } from "react-bootstrap";
 import { Link } from "react-router-dom";
@@ -20,7 +19,6 @@ import "../../styles/contentEditor.css";
 
 import Sidebar from "../../components/editor/Sidebar";
 import QuickEditForm from "../../components/editor/QuickEditForm";
-import { uploadsData, uploadStats } from "../../components/data/uploadsData";
 import { getQCStatus } from "../../services/contentService";
 
 /* ---------------------------------------------------------- */
