@@ -13,8 +13,8 @@ export const Sidebar = () => {
     { path: '/admin/plans-pricing', icon: 'bi-credit-card', label: 'Plans & Pricing' },
     { path: '/admin/roles-policies', icon: 'bi-shield-check', label: 'Roles & Policies' },
     { path: '/admin/audience', icon: 'bi-people', label: 'Audience & Engagement' },
-    { path: '/admin/revenue', icon: 'bi-currency-dollar', label: 'Revenue' },
-    { path: '/admin/renewals', icon: 'bi-arrow-repeat', label: 'Renewals' },
+    // { path: '/admin/revenue', icon: 'bi-currency-dollar', label: 'Revenue' },
+    // { path: '/admin/renewals', icon: 'bi-arrow-repeat', label: 'Renewals' },
     { path: '/admin/notifications', icon: 'bi-bell', label: 'Notifications' },
   ];
 

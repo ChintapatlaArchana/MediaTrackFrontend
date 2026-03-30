@@ -109,7 +109,7 @@ export const PlansPricing = () => {
       const [plansData, activeSubsData] = await Promise.all([
         adminService.getPlans(),
         adminService.getActiveSubscribersChart()
-      ]);
+      ]); 
 
       const formattedChartData = formatActiveSubscribersChart(activeSubsData);
       setPlans(plansData || []);

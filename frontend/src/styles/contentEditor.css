@@ -365,11 +365,12 @@ body {
   font-weight: 800;
   line-height: 1;
   margin-bottom: 4px;
+  color: white;
 }
 
 .ce-qc-label {
   font-size: 0.8rem;
-  color: var(--text-secondary);
+  color: var(--purple);
   font-weight: 500;
 }
 
@@ -532,7 +533,7 @@ body {
 .ce-form-label {
   font-size: 0.8rem;
   font-weight: 600;
-  color: var(--text-primary);
+  color: white;
   margin-bottom: 7px;
 }
 
@@ -554,7 +555,7 @@ body {
 }
 
 .ce-form-control::placeholder {
-  color: var(--text-muted) !important;
+  color: white !important;
 }
 
 .ce-form-control option {

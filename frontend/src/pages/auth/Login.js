@@ -7,7 +7,7 @@ import { MediaTrackLogo } from "../../MediaTrackLogo.js";
 import { Link } from "react-router-dom";
 
 export const Login = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm();
   const navigate = useNavigate();
   const [loginError, setLoginError] = useState("");
 
@@ -146,7 +146,10 @@ export const Login = () => {
 
               <div className="form-group">
                 {loginError && <p className="err" style={{textAlign: "center", marginBottom: "10px", marginTop: "10px", fontSize: "0.9rem"}}>{loginError}</p>}
-                <button type="submit" className="btn-primary-new">Login</button>
+                <button type="submit" className="btn-primary-new" disabled={isSubmitting}>
+                  {isSubmitting ? (<>
+                    <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                     Logging in...</>) : ("Login")}</button>
               </div>
             </form>
           </div>

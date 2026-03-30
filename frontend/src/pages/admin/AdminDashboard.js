@@ -9,8 +9,8 @@ import { Overview } from './Overview';
 import { PlansPricing } from './PlansPricing';
 import { RolesPolicies } from './RolesPolicies';
 import { AudienceEngagement } from './AudienceEngagement';
-import { Revenue } from './Revenue';
-import { Renewals } from './Renewals';
+// import { Revenue } from './Revenue';
+// import { Renewals } from './Renewals';
 import { Notifications } from './Notifications';
 
 
@@ -28,8 +28,8 @@ export const AdminDashboard = () => {
           <Route path="/plans-pricing" element={<PlansPricing />} />
           <Route path="/roles-policies" element={<RolesPolicies />} />
           <Route path="/audience" element={<AudienceEngagement />} />
-          <Route path="/revenue" element={<Revenue />} />
-          <Route path="/renewals" element={<Renewals />} />
+          {/* <Route path="/revenue" element={<Revenue />} />
+          <Route path="/renewals" element={<Renewals />} /> */}
           <Route path="/notifications" element={<Notifications />} />
         </Routes>
       </main>

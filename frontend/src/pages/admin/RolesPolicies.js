@@ -96,7 +96,7 @@ export const RolesPolicies = () => {
       email:    user.email    || '',
       phone:    user.phone    || user.phoneNumber || '',
       password: '',
-      role:     user.role     || 'Editor',
+      role:     user.role     || 'Admin',
       status:   user.status   || (user.active ? 'ACTIVE' : 'INACTIVE') || 'ACTIVE',
     });
     setFormError('');
@@ -381,7 +381,7 @@ export const RolesPolicies = () => {
                     placeholder="Enter email address"
                     value={formData.email}
                     onChange={handleChange}
-                    autoComplete="off"
+                    autoComplete="none"
                   />
                 </div>
 
@@ -405,6 +405,7 @@ export const RolesPolicies = () => {
                     placeholder={editingUser ? 'Leave blank to keep unchanged' : 'Enter password'}
                     value={formData.password}
                     onChange={handleChange}
+                    autoComplete="new-password"
                   />
                 </div>
 

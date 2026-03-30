@@ -71,7 +71,7 @@ const QuickEditForm = () => {
       }
       await updateQuickTitle(targetId, formData);
       alert("Title updated successfully ");
-      navigate(-1);
+      navigate("/editor");
     } catch (err) {
       console.error("Update error:", err);
       setErrorMsg(err.response?.data?.message || "Update failed");

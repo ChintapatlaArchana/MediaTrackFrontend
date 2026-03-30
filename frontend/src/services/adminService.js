@@ -232,7 +232,7 @@ export const adminService = {
   },
   markNotificationRead: async (id) => {
     try {
-      const resp = await axios.put(`${API_URL}/notification/admin/mark-read/${id}`, {}, getAuthHeaders());
+      const resp = await axios.patch(`${API_URL}/notification/admin/mark-read/${id}`, {}, getAuthHeaders());
       return resp.data;
     } catch (e) {
       console.error(`Failed to mark notification ${id} as read`, e);
@@ -241,7 +241,7 @@ export const adminService = {
   },
   dismissNotification: async (id) => {
     try {
-      const resp = await axios.delete(`${API_URL}/notification/admin/delete/${id}`, getAuthHeaders());
+      const resp = await axios.patch(`${API_URL}/notification/admin/dismiss/${id}`, {}, getAuthHeaders());
       return resp.data;
     } catch (e) {
       console.error(`Failed to dismiss notification ${id}`, e);
@@ -270,7 +270,7 @@ export const adminService = {
   },
 
   updateUser: async (userId, userData) => {
-    const resp = await axios.put(`${API_URL}/user/admin/update/${userId}`, userData, getAuthHeaders());
+    const resp = await axios.patch(`${API_URL}/user/admin/update/${userId}`, userData, getAuthHeaders());
     return resp.data;
   }
 };

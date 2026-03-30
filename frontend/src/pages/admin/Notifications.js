@@ -33,6 +33,7 @@ export const Notifications = () => {
    }, []);
 
    const unread = notifications.filter(n => n.status === 'Unread');
+   const visibleNotifications = notifications.filter(n => n.status !== 'Dismissed');
 
    // Group by category to ensure all 4 are represented
    const categories = ['Subscription', 'Content', 'Delivery', 'AdOps'];
@@ -66,6 +67,10 @@ export const Notifications = () => {
    };
 
    const handleMarkRead = async (id) => {
+      if (!id) {
+         console.error("Cannot mark as read: ID is undefined");
+         return;
+      }
       try {
          await adminService.markNotificationRead(id);
          await fetchNotifs();
@@ -75,6 +80,10 @@ export const Notifications = () => {
    };
 
    const handleDismiss = async (id) => {
+      if (!id) {
+         console.error("Cannot mark as read: ID is undefined");
+         return;
+      }
       try {
          await adminService.dismissNotification(id);
          await fetchNotifs();
@@ -171,11 +180,11 @@ export const Notifications = () => {
                         <i className="bi bi-list"></i>
                      </div>
                      <div className="list-group list-group-flush bg-transparent">
-                        {notifications.slice(0, 10).map((notif, idx) => {
+                        {visibleNotifications.slice(0, 10).map((notif, idx) => {
                            const timeAgo = Math.floor((new Date() - new Date(notif.createdDate)) / (1000 * 60 * 60));
                            let timeStr = timeAgo < 1 ? 'Just now' : (timeAgo < 24 ? `${timeAgo}h ago` : `${Math.floor(timeAgo / 24)}d ago`);
                            return (
-                              <div key={notif.id} className="list-group-item bg-transparent text-light border-secondary px-0 py-2 d-flex align-items-start">
+                              <div key={notif.notificationId} className="list-group-item bg-transparent text-light border-secondary px-0 py-2 d-flex align-items-start">
                                  <div className="me-3 mt-1" style={{ color: getCategoryColor(notif.category) }}>
                                     <i className={`bi ${getCategoryIcon(notif.category)} fs-5`}></i>
                                  </div>
@@ -192,14 +201,14 @@ export const Notifications = () => {
                                        <div className="d-flex gap-1 ms-2">
                                           {notif.status === 'Unread' && (
                                              <button className="btn btn-link p-1 text-success border-0" 
-                                                     onClick={() => handleMarkRead(notif.id)} 
+                                                     onClick={() => handleMarkRead(notif.notificationId)} 
                                                      title="Mark as read"
                                                      style={{ fontSize: '1.1rem', transition: 'transform 0.2s' }}>
                                                 <i className="bi bi-check2"></i>
                                              </button>
                                           )}
                                           <button className="btn btn-link p-1 text-danger border-0" 
-                                                  onClick={() => handleDismiss(notif.id)} 
+                                                  onClick={() => handleDismiss(notif.notificationId)} 
                                                   title="Dismiss"
                                                   style={{ fontSize: '1.1rem', transition: 'transform 0.2s' }}>
                                              <i className="bi bi-x"></i>
